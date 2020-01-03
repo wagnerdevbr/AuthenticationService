@@ -42,13 +42,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return super.authenticationManager();
 	}
 	
-	//Configuracoes de autenticacao
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(authenticationService).passwordEncoder(new ServicePasswordEncoder());
 	}
 	
-	//Configuracoes de autorizacao
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
@@ -56,6 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
 		.antMatchers("/", "/index").permitAll()
+		.antMatchers("/h2").permitAll()
 		.antMatchers(
 	            "/v2/api-docs", 
 	            "/swagger-resources/**",  
@@ -69,8 +68,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 	}
 	
-	
-	//Configuracoes de recursos estaticos(js, css, imagens, etc.)
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/**.html" );
@@ -80,6 +77,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    web.ignoring().antMatchers("/swagger-ui.html");
 	    web.ignoring().antMatchers("/swagger-resources/**");
 	    web.ignoring().antMatchers("/webjars/**");
+	    web.ignoring().antMatchers("/h2");
 	}
 	
 	@Bean
@@ -89,8 +87,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		configuration.setAllowedOrigins(Collections.singletonList("*"));
 		configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
 		configuration.setAllowCredentials(true);
-		configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type",
-				"Access-Control-Allow-Origin:*", "Access-Control-Allow:*"));
+		configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type",	"Access-Control-Allow-Origin:*", "Access-Control-Allow:*"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 

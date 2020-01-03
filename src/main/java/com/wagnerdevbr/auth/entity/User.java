@@ -16,8 +16,8 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-@Entity
 @ToString
+@Entity
 public class User implements Serializable,UserDetails {
 
 	private static final long serialVersionUID = 8466780495417005351L;

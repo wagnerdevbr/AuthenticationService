@@ -11,9 +11,11 @@ import javax.persistence.ManyToMany;
 import org.springframework.security.core.GrantedAuthority;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
+@ToString
 public class Module implements Serializable,GrantedAuthority {
 
 	private static final long serialVersionUID = -6342351839593810074L;
@@ -25,7 +27,7 @@ public class Module implements Serializable,GrantedAuthority {
 	@Column
 	private String name;
 
-	@ManyToMany(mappedBy="userGroups")
+	@ManyToMany
 	private List<UserGroup> userGroups;
 
 	public Module() {
