@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PersoServiceApplication {
+public class AuthenticationService {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PersoServiceApplication.class, args);
+		SpringApplication.run(AuthenticationService.class, args);
 	}
 	
 }
