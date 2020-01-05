@@ -30,9 +30,6 @@ public class Module implements Serializable,GrantedAuthority {
 	@ManyToMany
 	private List<UserGroup> userGroups;
 
-	public Module() {
-	}
-
 	@Override
 	public String getAuthority() {
 		return getName();

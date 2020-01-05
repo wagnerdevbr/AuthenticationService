@@ -54,7 +54,7 @@ public class AuthenticationController {
 
 		try {
 
-			if (AuthenticationManagerRoles.isUserAllowedModule(user, ModulesEnum.values())) {
+			if (user!=null && AuthenticationManagerRoles.isUserAllowedModule(user, ModulesEnum.values())) {
 
 				Authentication authentication = authManager.authenticate(loginInformation);
 				String token = tokenService.gerarToken(authentication);

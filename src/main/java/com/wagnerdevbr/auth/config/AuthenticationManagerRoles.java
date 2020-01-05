@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.wagnerdevbr.auth.entity.User;
 import com.wagnerdevbr.auth.enums.ModulesEnum;
+import com.wagnerdevbr.auth.exception.AuthenticationFailException;
 
 public class AuthenticationManagerRoles implements Serializable{
 
@@ -15,9 +16,9 @@ public class AuthenticationManagerRoles implements Serializable{
 		
 	}
 	
-	public static User getAuthenticatedOperador() throws Exception {
+	public static User getAuthenticatedOperador() throws AuthenticationFailException {
 		if(authenticatedUser==null) {
-			throw new Exception("User is not logged in!");
+			throw new AuthenticationFailException("User is not logged in!");
 		}
 		return authenticatedUser;
 	}
@@ -26,9 +27,9 @@ public class AuthenticationManagerRoles implements Serializable{
 		authenticatedUser = user;
 	}
 	
-	public static Boolean isUserAllowedModule(User user, ModulesEnum... modules) throws Exception  {
+	public static boolean isUserAllowedModule(User user, ModulesEnum... modules)   {
 		for (ModulesEnum m:modules) {
-			Boolean ret = authenticatedUser.getAuthorities().stream().filter(i->i.getAuthority().trim().equalsIgnoreCase(m.getCode())).count()>0?Boolean.TRUE:Boolean.FALSE;
+			boolean ret = user.getAuthorities().stream().filter(i->i.getAuthority().trim().equalsIgnoreCase(m.getCode())).count()>0?Boolean.TRUE:Boolean.FALSE;
 			
 			if(ret) {
 				return Boolean.TRUE;

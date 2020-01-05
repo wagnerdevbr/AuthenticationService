@@ -51,10 +51,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.cors();
+		http.headers().frameOptions().disable();
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
 		.antMatchers("/", "/index").permitAll()
-		.antMatchers("/h2").permitAll()
+        .antMatchers("/console/**").permitAll()
 		.antMatchers(
 	            "/v2/api-docs", 
 	            "/swagger-resources/**",  

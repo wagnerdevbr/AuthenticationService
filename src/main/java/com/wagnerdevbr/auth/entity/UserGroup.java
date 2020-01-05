@@ -32,7 +32,4 @@ public class UserGroup implements Serializable {
 	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Module> modules;
 
-	public UserGroup() {
-	}
-
 }

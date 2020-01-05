@@ -2,6 +2,7 @@ package com.wagnerdevbr.auth.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Collections;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,7 +40,10 @@ public class User implements Serializable,UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return userGroup.getModules();
+		if(userGroup!=null) {
+			return userGroup.getModules();
+		}
+		return Collections.emptyList();
 	}
 
 	@Override
