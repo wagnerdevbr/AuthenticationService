@@ -48,7 +48,7 @@ public class AuthenticationController {
     @ApiResponse(code = 401, message = "User not found"),
     @ApiResponse(code = 500, message = "Internal server error") })
 	@PostMapping
-	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid UserDTO userDTO) {
+	public ResponseEntity<TokenDTO> auth(@RequestBody @Valid UserDTO userDTO) {
 		UsernamePasswordAuthenticationToken loginInformation = userDTO.converter();
 		User user = userRepository.findByLogin(userDTO.getLogin());
 
